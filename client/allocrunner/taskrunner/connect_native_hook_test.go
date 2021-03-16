@@ -267,8 +267,9 @@ func TestTaskRunner_ConnectNativeHook_Ok(t *testing.T) {
 	consulConfig.Address = testConsul.HTTPAddr
 	consulAPIClient, err := consulapi.NewClient(consulConfig)
 	require.NoError(t, err)
+	namespacesClient := agentconsul.NewNamespacesClient(consulAPIClient.Namespaces())
 
-	consulClient := agentconsul.NewServiceClient(consulAPIClient.Agent(), logger, true)
+	consulClient := agentconsul.NewServiceClient(consulAPIClient.Agent(), namespacesClient, logger, true)
 	go consulClient.Run()
 	defer consulClient.Shutdown()
 	require.NoError(t, consulClient.RegisterWorkload(agentconsul.BuildAllocServices(mock.Node(), alloc, agentconsul.NoopRestarter())))
@@ -331,8 +332,9 @@ func TestTaskRunner_ConnectNativeHook_with_SI_token(t *testing.T) {
 	consulConfig.Address = testConsul.HTTPAddr
 	consulAPIClient, err := consulapi.NewClient(consulConfig)
 	require.NoError(t, err)
+	namespacesClient := agentconsul.NewNamespacesClient(consulAPIClient.Namespaces())
 
-	consulClient := agentconsul.NewServiceClient(consulAPIClient.Agent(), logger, true)
+	consulClient := agentconsul.NewServiceClient(consulAPIClient.Agent(), namespacesClient, logger, true)
 	go consulClient.Run()
 	defer consulClient.Shutdown()
 	require.NoError(t, consulClient.RegisterWorkload(agentconsul.BuildAllocServices(mock.Node(), alloc, agentconsul.NoopRestarter())))
@@ -407,8 +409,9 @@ func TestTaskRunner_ConnectNativeHook_shareTLS(t *testing.T) {
 		consulConfig.Address = testConsul.HTTPAddr
 		consulAPIClient, err := consulapi.NewClient(consulConfig)
 		require.NoError(t, err)
+		namespacesClient := agentconsul.NewNamespacesClient(consulAPIClient.Namespaces())
 
-		consulClient := agentconsul.NewServiceClient(consulAPIClient.Agent(), logger, true)
+		consulClient := agentconsul.NewServiceClient(consulAPIClient.Agent(), namespacesClient, logger, true)
 		go consulClient.Run()
 		defer consulClient.Shutdown()
 		require.NoError(t, consulClient.RegisterWorkload(agentconsul.BuildAllocServices(mock.Node(), alloc, agentconsul.NoopRestarter())))
@@ -523,8 +526,9 @@ func TestTaskRunner_ConnectNativeHook_shareTLS_override(t *testing.T) {
 	consulConfig.Address = testConsul.HTTPAddr
 	consulAPIClient, err := consulapi.NewClient(consulConfig)
 	require.NoError(t, err)
+	namespacesClient := agentconsul.NewNamespacesClient(consulAPIClient.Namespaces())
 
-	consulClient := agentconsul.NewServiceClient(consulAPIClient.Agent(), logger, true)
+	consulClient := agentconsul.NewServiceClient(consulAPIClient.Agent(), namespacesClient, logger, true)
 	go consulClient.Run()
 	defer consulClient.Shutdown()
 	require.NoError(t, consulClient.RegisterWorkload(agentconsul.BuildAllocServices(mock.Node(), alloc, agentconsul.NoopRestarter())))

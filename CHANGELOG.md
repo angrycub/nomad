@@ -1,5 +1,8 @@
 ## 1.1.0 (Unreleased)
 
+FEATURES:
+ * **Consul Namespaces**: Adds support for Consul Namespaces [[GH-10235](https://github.com/hashicorp/nomad/pull/10235)]
+
 BUG FIXES:
  * agent: Only allow querying Prometheus formatted metrics if Prometheus is enabled within the config [[GH-10140](https://github.com/hashicorp/nomad/pull/10140)]
  * api: Added missing devices block to AllocatedTaskResources [[GH-10064](https://github.com/hashicorp/nomad/pull/10064)]
